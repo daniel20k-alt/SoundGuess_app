@@ -13,6 +13,7 @@
 		EE3F2763252E113F0016378C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE3F2761252E113F0016378C /* Main.storyboard */; };
 		EE3F2765252E11440016378C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE3F2764252E11440016378C /* Assets.xcassets */; };
 		EE3F2768252E11440016378C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE3F2766252E11440016378C /* LaunchScreen.storyboard */; };
+		EE3F2775252FA1340016378C /* RecordSoundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3F2774252FA1340016378C /* RecordSoundViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		EE3F2764252E11440016378C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EE3F2767252E11440016378C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EE3F2769252E11440016378C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EE3F2774252FA1340016378C /* RecordSoundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordSoundViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				EE3F275B252E113F0016378C /* AppDelegate.swift */,
 				EE3F275D252E113F0016378C /* SceneDelegate.swift */,
 				EE3F275F252E113F0016378C /* ViewController.swift */,
+				EE3F2774252FA1340016378C /* RecordSoundViewController.swift */,
 				EE3F2761252E113F0016378C /* Main.storyboard */,
 				EE3F2764252E11440016378C /* Assets.xcassets */,
 				EE3F2766252E11440016378C /* LaunchScreen.storyboard */,
@@ -138,6 +141,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EE3F2760252E113F0016378C /* ViewController.swift in Sources */,
+				EE3F2775252FA1340016378C /* RecordSoundViewController.swift in Sources */,
 				EE3F275C252E113F0016378C /* AppDelegate.swift in Sources */,
 				EE3F275E252E113F0016378C /* SceneDelegate.swift in Sources */,
 			);
