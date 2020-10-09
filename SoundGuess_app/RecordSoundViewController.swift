@@ -5,11 +5,16 @@
 //  Created by DDDD on 08/10/2020.
 //
 
+import AVFoundation
 import UIKit
 
 class RecordSoundViewController: UIViewController {
-
+    
     var stackView: UIStackView!
+    
+    var recordButton: UIButton!
+    var recordingSession: AVAudioSession!
+    var soundRecorder: AVAudioRecorder!
     
     override func loadView() {
         view = UIView()
@@ -29,15 +34,59 @@ class RecordSoundViewController: UIViewController {
         stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewDidLoad() {
+        
+        title = "Record the sound"
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Record", style: .plain, target: nil, action: nil)
+        
+        recordingSession = AVAudioSession.sharedInstance()
+        
+        do {
+            try recordingSession.setCategory(.playAndRecord, mode: .default)
+            try recordingSession.setActive(true)
+            recordingSession.requestRecordPermission() { [unowned self] allowed in
+                DispatchQueue.main.async {
+                    if allowed {
+                        self.loadRecordingUI()
+                    } else {
+                        self.loadFailUI()
+                    }
+                }
+            }
+        } catch {
+            self.loadFailUI() {
+                
+            }
+        }
+  
     }
-    */
-
+    
+    func loadRecordingUI() {
+        recordButton = UIButton()
+        recordButton.translatesAutoresizingMaskIntoConstraints = false
+        recordButton.setTitle("Tap to record", for: .normal)
+        recordButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .title1)
+        recordButton.addTarget(self, action: #selector(recordTapped), for: .touchUpInside)
+        stackView.addArrangedSubview(recordButton)
+    }
+    
+    func loadFailUI() {
+        let failLabel = UILabel()
+        failLabel.font = UIFont.preferredFont(forTextStyle: .headline)
+        failLabel.text = "Recording failed: please ensure the app has access to your microphone."
+        failLabel.numberOfLines = 0
+        
+        stackView.addArrangedSubview(failLabel)
+        
+    }
+    
+    class func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let documentsDirectory = paths[0]
+        return documentsDirectory
+    }
+    
+    class func getSoundURL() -> URL {
+        return getDocumentsDirectory().appendingPathComponent("sound.m4a")
+    }
 }
