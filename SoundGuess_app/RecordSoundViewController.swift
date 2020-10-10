@@ -8,7 +8,7 @@
 import AVFoundation
 import UIKit
 
-class RecordSoundViewController: UIViewController {
+class RecordSoundViewController: UIViewController, AVAudioRecorderDelegate {
     
     var stackView: UIStackView!
     
@@ -54,11 +54,9 @@ class RecordSoundViewController: UIViewController {
                 }
             }
         } catch {
-            self.loadFailUI() {
+            self.loadFailUI()
                 
-            }
         }
-  
     }
     
     func loadRecordingUI() {
@@ -79,6 +77,69 @@ class RecordSoundViewController: UIViewController {
         stackView.addArrangedSubview(failLabel)
         
     }
+    
+    func startRecording() {
+        view.backgroundColor = UIColor(red: 0.6, green: 0, blue: 0, alpha: 1)
+        recordButton.setTitle("Tap to stop", for: .normal)
+        
+        let audioURL = RecordSoundViewController.getSoundURL()
+        print(audioURL.absoluteString)
+        
+        let settings = [
+            AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
+            AVSampleRateKey: 12000,
+            AVNumberOfChannelsKey: 1,
+            AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
+        ]
+        
+        do {
+            soundRecorder = try AVAudioRecorder(url: audioURL, settings: settings)
+            soundRecorder.delegate = self
+            soundRecorder.record()
+        } catch {
+            finishRecording(success: false)
+        }
+    }
+    
+    
+    func finishRecording(success: Bool) {
+        view.backgroundColor = UIColor(red: 0, green: 0.6, blue: 0, alpha: 1)
+        
+        soundRecorder.stop()
+        soundRecorder = nil
+        
+        if success {
+            recordButton.setTitle("Tap to re-record", for: .normal)
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(nextTapped))
+        } else {
+            recordButton.setTitle("Tap to record", for: .normal)
+            
+            let ac = UIAlertController(title: "Record failed", message: "There was a problem recording your sound. Please try again.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "Ok", style: .default))
+            present(ac, animated: true)
+        }
+    }
+    
+    @objc func nextTapped() {
+        
+    }
+    
+    @objc func recordTapped() {
+        if soundRecorder == nil {
+            startRecording()
+        } else {
+            finishRecording(success: true)
+        }
+    }
+    
+    
+    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
+        if !flag {
+        finishRecording(success: false)
+    }
+}
+    
+    
     
     class func getDocumentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
