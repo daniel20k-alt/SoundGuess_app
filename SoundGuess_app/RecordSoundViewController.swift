@@ -16,6 +16,10 @@ class RecordSoundViewController: UIViewController, AVAudioRecorderDelegate {
     var recordingSession: AVAudioSession!
     var soundRecorder: AVAudioRecorder!
     
+    var playButton: UIButton!
+    
+    var soundPlayer: AVAudioPlayer!
+    
     override func loadView() {
         view = UIView()
         
@@ -55,7 +59,6 @@ class RecordSoundViewController: UIViewController, AVAudioRecorderDelegate {
             }
         } catch {
             self.loadFailUI()
-                
         }
     }
     
@@ -66,6 +69,16 @@ class RecordSoundViewController: UIViewController, AVAudioRecorderDelegate {
         recordButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .title1)
         recordButton.addTarget(self, action: #selector(recordTapped), for: .touchUpInside)
         stackView.addArrangedSubview(recordButton)
+        
+        
+        playButton = UIButton()
+        playButton.translatesAutoresizingMaskIntoConstraints = false
+        playButton.setTitle("Tap to Play", for: .normal)
+        playButton.isHidden = true
+        playButton.alpha = 0
+        playButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .title1)
+        playButton.addTarget(self, action: #selector(playTapped), for: .touchUpInside)
+        stackView.addArrangedSubview(playButton)
     }
     
     func loadFailUI() {
@@ -118,6 +131,13 @@ class RecordSoundViewController: UIViewController, AVAudioRecorderDelegate {
             ac.addAction(UIAlertAction(title: "Ok", style: .default))
             present(ac, animated: true)
         }
+        
+        if playButton.isHidden {
+            UIView.animate(withDuration: 0.35) { [unowned self] in
+                self.playButton.isHidden = false
+                self.playButton.alpha = 1
+            }
+        }
     }
     
     @objc func nextTapped() {
@@ -127,18 +147,37 @@ class RecordSoundViewController: UIViewController, AVAudioRecorderDelegate {
     @objc func recordTapped() {
         if soundRecorder == nil {
             startRecording()
+            
+            if !playButton.isHidden {
+                UIView.animate(withDuration: 0.35) { [unowned self] in
+                    self.playButton.isHidden = true
+                    self.playButton.alpha = 0
+                }
+            }
+            
         } else {
             finishRecording(success: true)
         }
     }
     
+    @objc func playTapped() {
+        let audioURL = RecordSoundViewController.getSoundURL()
+        
+        do {
+            soundPlayer = try AVAudioPlayer(contentsOf: audioURL)
+            soundPlayer.play()
+        } catch {
+            let ac = UIAlertController(title: "Playback failed", message: "There was a problem playing your sound. Please try re-uploading the sound.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "Ok", style: .default))
+            present(ac, animated: true)
+        }
+    }
     
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
         if !flag {
         finishRecording(success: false)
     }
 }
-    
     
     
     class func getDocumentsDirectory() -> URL {
