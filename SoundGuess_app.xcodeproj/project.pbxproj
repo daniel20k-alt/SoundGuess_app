@@ -16,6 +16,7 @@
 		EE3F2775252FA1340016378C /* RecordSoundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3F2774252FA1340016378C /* RecordSoundViewController.swift */; };
 		EE3F277A253317900016378C /* SelectGenreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3F27792533178F0016378C /* SelectGenreViewController.swift */; };
 		EE3F278025331BEC0016378C /* AddCommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3F277F25331BEC0016378C /* AddCommentsViewController.swift */; };
+		EE3F27892533A59D0016378C /* SubmitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3F27882533A59C0016378C /* SubmitViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		EE3F2774252FA1340016378C /* RecordSoundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordSoundViewController.swift; sourceTree = "<group>"; };
 		EE3F27792533178F0016378C /* SelectGenreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SelectGenreViewController.swift; path = "New Group1/SelectGenreViewController.swift"; sourceTree = "<group>"; };
 		EE3F277F25331BEC0016378C /* AddCommentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCommentsViewController.swift; sourceTree = "<group>"; };
+		EE3F27882533A59C0016378C /* SubmitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +67,7 @@
 				EE3F27792533178F0016378C /* SelectGenreViewController.swift */,
 				EE3F2774252FA1340016378C /* RecordSoundViewController.swift */,
 				EE3F277F25331BEC0016378C /* AddCommentsViewController.swift */,
+				EE3F27882533A59C0016378C /* SubmitViewController.swift */,
 				EE3F275B252E113F0016378C /* AppDelegate.swift */,
 				EE3F275D252E113F0016378C /* SceneDelegate.swift */,
 				EE3F275F252E113F0016378C /* ViewController.swift */,
@@ -146,6 +149,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE3F27892533A59D0016378C /* SubmitViewController.swift in Sources */,
 				EE3F2760252E113F0016378C /* ViewController.swift in Sources */,
 				EE3F2775252FA1340016378C /* RecordSoundViewController.swift in Sources */,
 				EE3F277A253317900016378C /* SelectGenreViewController.swift in Sources */,
