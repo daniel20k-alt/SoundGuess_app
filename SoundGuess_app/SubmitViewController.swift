@@ -58,6 +58,20 @@ class SubmitViewController: UIViewController {
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        
+        doSubmission()
+    }
+    
+    func doSubmission() {
+        
+    }
+    
+    
+    @objc func doneTapped() {
+        _ = navigationController?.popToRootViewController(animated: true)
+    }
+    
     
     /*
     // MARK: - Navigation
