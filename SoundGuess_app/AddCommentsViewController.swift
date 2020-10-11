@@ -51,7 +51,11 @@ class AddCommentsViewController: UIViewController, UITextViewDelegate {
         
     }
     
-    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.text == placeholder {
+            textView.text = ""
+        }
+    }
     
     /*
     // MARK: - Navigation
