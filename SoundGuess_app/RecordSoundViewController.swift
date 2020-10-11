@@ -88,7 +88,6 @@ class RecordSoundViewController: UIViewController, AVAudioRecorderDelegate {
         failLabel.numberOfLines = 0
         
         stackView.addArrangedSubview(failLabel)
-        
     }
     
     func startRecording() {
@@ -142,6 +141,9 @@ class RecordSoundViewController: UIViewController, AVAudioRecorderDelegate {
     
     @objc func nextTapped() {
         
+        let vc = SelectGenreViewController()
+        navigationController?.pushViewController(vc, animated: true)
+        
     }
     
     @objc func recordTapped() {
@@ -172,6 +174,7 @@ class RecordSoundViewController: UIViewController, AVAudioRecorderDelegate {
             present(ac, animated: true)
         }
     }
+    
     
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
         if !flag {
