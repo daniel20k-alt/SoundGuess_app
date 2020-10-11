@@ -18,6 +18,9 @@ class SubmitViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = "You're all set"
+        navigationItem.hidesBackButton = true
   
     }
     
